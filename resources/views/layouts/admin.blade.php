@@ -96,19 +96,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('create_event')}}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="fa fa-image nav-icon"></i>
                   <p>Images</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('show_event')}}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="fa fa-film nav-icon"></i>
                   <p>Videos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('show_event')}}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="fa fa-file nav-icon"></i>
                   <p>Documents</p>
                 </a>
@@ -134,13 +134,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('create_agenda')}}" class="nav-link">
+                    <a href="" class="nav-link">
                       <i class="fa fa-circle-o nav-icon"></i>
                       <p>Create Agenda</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('show_agenda')}}" class="nav-link">
+                    <a href="" class="nav-link">
                       <i class="fa fa-circle-o nav-icon"></i>
                       <p>Show Agenda</p>
                     </a>
@@ -157,13 +157,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('create_agenda')}}" class="nav-link">
+                    <a href="" class="nav-link">
                       <i class="fa fa-circle-o nav-icon"></i>
                       <p>Create Agenda</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('show_agenda')}}" class="nav-link">
+                    <a href="" class="nav-link">
                       <i class="fa fa-circle-o nav-icon"></i>
                       <p>Show Agenda</p>
                     </a>
@@ -182,13 +182,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('create_feedback')}}" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>Create Feedback</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('show_feedback')}}" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>Show Feedback</p>
                   </a>
@@ -205,13 +205,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('create_live_polling')}}" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>Create Live Poll</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('show_live_polling')}}" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>Show Live Polls</p>
                   </a>
