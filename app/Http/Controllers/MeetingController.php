@@ -9,19 +9,23 @@ use DB;
 
 class MeetingController extends Controller
 {
+
     public function create()
     {
-        return view('meeting.create',compact('post'));
+    	$verticals_name = DB::select('select * from verticals');
+    	$data = [
+    	'verticals_name'=>	$verticals_name];
+
+        return view('meeting.create',$data);
     }
 
     public function save_data(Request $request)
     {
         		$this->validate(request(),[
 		    'meeting_name'        => 'required',
-            'meeting_time'         => 'date_format:Y-m-d H:i:s',
+            'meeting_time'         => 'required',
             'meeting_created'         => 'required',
-            'verticals' => 'required',
-            'subverticals'  => 'required'
+            'verticals' => 'required'
 		]);
 
 		$meeting= new meeting();
@@ -38,5 +42,20 @@ class MeetingController extends Controller
 		        return redirect()->route('create')
                         ->with('message','meeting create successfully');
 
+    }
+
+    public function fetch_sub_vertical(Request $request)
+    {
+    	
+
+	 	$sub_verticals = DB::select('select * from sub_verticals where vertical_id= ?', [$request->message]);
+    		 	$response = array(
+          'status' => 'success',
+          'sub_verticals' => $sub_verticals,
+      );
+    		 
+
+				return response()->json($response);
+	    
     }
 }
