@@ -19,12 +19,16 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
   <!-- Datetime picker -->
-  <link rel="stylesheet" href="{{ asset('plugins/timepicker/jquery.timepicker.min.css') }}">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<!-- datepicker -->
+  <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src="{{ asset('plugins/datetimepicker/jquery.js') }}"></script>
   <script src="{{ asset('plugins/timepicker/jquery.timepicker.min.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -111,6 +115,29 @@
                 <a href="" class="nav-link">
                   <i class="fa fa-file nav-icon"></i>
                   <p>Documents</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-folder"></i>
+              <p>
+                Meeting
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fa fa-image nav-icon"></i>
+                  <p>Create meeting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fa fa-film nav-icon"></i>
+                  <p>Meeting List</p>
                 </a>
               </li>
             </ul>
@@ -245,7 +272,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -266,9 +293,7 @@
 <script src="{{ asset('plugins/knob/jquery.knob.js')}}"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- datepicker -->
-<script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <!-- Slimscroll -->
@@ -277,14 +302,15 @@
 <script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!--script src="{{ asset('plugins/datetimepicker/jquery.datetimepicker.js') }}"></script>
 <script src="{{ asset('plugins/datetimepicker/jquery.datetimepicker.full.js') }}"></script-->
-<script src="{{ asset('plugins/datetimepicker/jquery.js') }}"></script>
-<script src="{{ asset('plugins/timepicker/jquery.timepicker.min.js') }}"></script>
+<!-- <script src="{{ asset('plugins/datetimepicker/jquery.js') }}"></script>
+ --><script src="{{ asset('plugins/timepicker/jquery.timepicker.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 </body>
 </html>
