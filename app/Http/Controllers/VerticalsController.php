@@ -10,6 +10,18 @@ use DB;
 class VerticalsController extends Controller
 {
 
+	public function index()
+    {
+		$verticals_list = DB::select('select * from verticals');
+		$verticals_count = count($verticals_list);
+		$data = [
+		'verticals_name'=>	$verticals_list,
+		'verticals_count'=> $verticals_count
+		];
+
+		return view('verticals.index',$data);
+    }
+
 	public function create_vertical()
     {
     	return view('verticals.create_vertical',compact('post'));

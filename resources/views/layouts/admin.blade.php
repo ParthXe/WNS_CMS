@@ -129,13 +129,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('create') }}" class="nav-link">
                   <i class="fa fa-image nav-icon"></i>
                   <p>Create meeting</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('list') }}" class="nav-link">
                   <i class="fa fa-film nav-icon"></i>
                   <p>Meeting List</p>
                 </a>
@@ -146,56 +146,28 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-list-alt"></i>
               <p>
-                Widgets
+                Verticals
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="{{ route('create_vertical') }}" class="nav-link">
                   <i class="nav-icon fa fa-bar-chart"></i>
                   <p>
-                    Polls
+                    Create Vertical
                     <i class="right fa fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="fa fa-circle-o nav-icon"></i>
-                      <p>Create Agenda</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="fa fa-circle-o nav-icon"></i>
-                      <p>Show Agenda</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa fa-sticky-note"></i>
+                <a href="{{ route('list_vertical') }}" class="nav-link">
+                  <i class="nav-icon fa fa-bar-chart"></i>
                   <p>
-                    Post-IT
+                    Vertical list
                     <i class="right fa fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="fa fa-circle-o nav-icon"></i>
-                      <p>Create Agenda</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="" class="nav-link">
-                      <i class="fa fa-circle-o nav-icon"></i>
-                      <p>Show Agenda</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </li>

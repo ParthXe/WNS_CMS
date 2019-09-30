@@ -6,9 +6,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\meeting;
 use DB;
+use File;
+
 
 class MeetingController extends Controller
 {
+
+	public function index()
+    {
+        $meeting_list = DB::select('select meetings.id as meetingId, meetings.meeting_name, meetings.meeting_date, meetings.verticals_id, verticals.id, verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id');
+        $meeting_count = count($meeting_list);
+
+        $data = [
+            'meeting_list'=>$meeting_list,
+            'meeting_count'=>$meeting_count];
+
+        return view('meeting.index',$data);
+    }
 
     public function create()
     {
@@ -38,9 +52,29 @@ class MeetingController extends Controller
 
 
 		$meeting->save();
+		$insertedId = $meeting->id;
+		$file_count = $request['count'];
+		for ($q=1; $q <= $file_count ; $q++) {
+			$folder_name =  $request['folder_name_'.$q];
+			//echo 'Ashish'.$folder_name;
+			$path = public_path().'/uploads/meeting/' . $folder_name;
+			$fpath = File::makeDirectory($path, $mode = 0777, true, true);
+			$files =  $request->file('files_'.$q);
+			
+			$data =  array();
+			foreach($files as $file)
+            {
 
+                $name=$file->getClientOriginalName();
+                $file->move($path, $name);  
+                $data[] = $name;  
+            }
+
+			$values = array('meeting_id' => $insertedId,'folder_name' =>$folder_name,'asset_data'=> json_encode($data) );
+			DB::table('meeting_assets')->insert($values);
+		}
 		        return redirect()->route('create')
-                        ->with('message','meeting create successfully');
+                        ->with('message','meeting created successfully');
 
     }
 

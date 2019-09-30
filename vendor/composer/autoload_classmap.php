@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\CreateMeeting' => $baseDir . '/app/Http/Controllers/CreateMeeting.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MeetingController' => $baseDir . '/app/Http/Controllers/MeetingController.php',
+    'App\\Http\\Controllers\\VerticalsController' => $baseDir . '/app/Http/Controllers/VerticalsController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',

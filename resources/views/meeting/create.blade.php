@@ -46,7 +46,68 @@
                 },
             });
         });
+
+            bookIndex = (typeof(varCount) != "undefined" && varCount !== null) ? varCount : 0;
+
+    $('#bookForm')
+
+        // Add button click handler
+        .on('click', '.addButton', function() {
+
+        	
+	        	var curCount = $('#rowNumber').val();
+
+	        	$('#rowNumber').val( parseInt(curCount) + 1);
+
+	            bookIndex++;
+	            var $template = $('#bookTemplate'),
+	                $clone    = $template
+	                                .clone()
+	                                .removeClass('hide')
+	                                .removeAttr('id')
+	                                .attr('data-book-index', bookIndex)
+	                                .insertBefore($template);
+
+	            // Update the name attributes
+	            $clone
+	            	//.find('[name="userfile[]"]').attr('name', 'userfile_' + bookIndex + '[]').end()
+	            	.find('[name="files[]"]').attr('name', 'files_' + bookIndex + '[]').end()
+	            	.find('[name="folder_name"]').attr('name', 'folder_name_' + bookIndex + '').end()
+	            	
+
+
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookTemplate')
+  
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+
+
     });
+
+        // Add varient count
+function incrementValue() {
+	var value = parseInt(document.getElementById('number').value, 10);
+	value = isNaN(value) ? 0 : value;
+	value++;
+	document.getElementById('number').value = value;
+}
+
+function decrementValue() {
+	var value = parseInt(document.getElementById('number').value, 10);
+	value = isNaN(value) ? 0 : value;
+	value--;
+	document.getElementById('number').value = value;
+}
 
 </script>
     <div class="content-wrapper">
@@ -81,7 +142,7 @@
               <div class="box">
 
                 <div class="box-body ">
-                    {!! Form::open(['url' => '/save_data','method'=>'post']) !!}
+                    {!! Form::open(['url' => '/save_data','method'=>'post','enctype'=>'multipart/form-data']) !!}
 
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                         {!! Form::label('Meeting Name:') !!}
@@ -101,7 +162,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('Meeting Created By:') !!}
-                        {!! Form::text('meeting_created',null,['class' => 'form-control']) !!}
+                        {!! Form::text('meeting_created',Auth::user()->name,['class' => 'form-control','readonly'=>'true']) !!}
                     </div>
                     <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
                         {!! Form::label('Verticals:') !!}
@@ -121,10 +182,37 @@
                         <select id="subverticals" class="fetchval btn dropdown-toggle form-control" id="project_id" name="subverticals">
                               	
                         </select>
-
                         
                     </div>
+                               <div id="bookForm">
+									
+									<div class="form-group box box-default hide" id="bookTemplate">
+								        <div class="box-header with-border">
 
+								        </div>								
+										<div class="box box-solid">
+											<div class="box-body">
+												<div class="form-group">
+													<label for="userEditMobile">Folder Name</label>
+													<input type="text" class="form-control" name="folder_name" value="" >
+												</div>	
+												<div class="form-group">
+													<label for="userEditMobile">Meeting Assets</label>
+													<input type="file" class="form-control" name="files[]" placeholder="Trends Title" value="" multiple>
+												</div>
+
+												<div class="form-group col-sm-12">
+													<button onClick="decrementValue()" type="button" class="btn btn-danger removeButton">Remove</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<button type="button" onClick="incrementValue()" class="btn btn-success addButton">Add Folder</button>
+										<input type="hidden" id="number" name="count" value="0"/>
+									</div>
+								</div>
 
                     <hr>
 

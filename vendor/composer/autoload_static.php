@@ -377,6 +377,7 @@ class ComposerStaticInitdf068ba8f8dd7e8221efc5bdd607cb15
         'App\\Http\\Controllers\\CreateMeeting' => __DIR__ . '/../..' . '/app/Http/Controllers/CreateMeeting.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MeetingController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingController.php',
+        'App\\Http\\Controllers\\VerticalsController' => __DIR__ . '/../..' . '/app/Http/Controllers/VerticalsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',

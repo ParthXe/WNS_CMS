@@ -25,8 +25,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');                                                      
 Route::get('/test', 'HomeController@test')->name('test');
+
+Route::get('/meeting_list', 'MeetingController@index')->name('list');
+
 Route::get('/create', 'MeetingController@create')->name('create');
 Route::post('/save_data', 'MeetingController@save_data')->name('save_data');
+
+Route::get('/verticals_list', 'VerticalsController@index')->name('list_vertical');
 Route::post('/save_verticals', 'VerticalsController@save_vertical')->name('save_vertical');
 Route::get('/create_vertical', 'VerticalsController@create_vertical')->name('create_vertical');
 Route::post('/fetch_vertical', 'MeetingController@fetch_sub_vertical')->name('fetch_sub_vertical');
