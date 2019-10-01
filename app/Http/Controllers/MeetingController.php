@@ -61,22 +61,112 @@ class MeetingController extends Controller
 			$fpath = File::makeDirectory($path, $mode = 0777, true, true);
 			$files =  $request->file('files_'.$q);
 			
-			$data =  array();
+			$tempArray =  array();
+            $data =  array();
 			foreach($files as $file)
             {
 
                 $name=$file->getClientOriginalName();
                 $file->move($path, $name);  
-                $data[] = $name;  
+                $tempArray[] = $name;  
             }
-
-			$values = array('meeting_id' => $insertedId,'folder_name' =>$folder_name,'asset_data'=> json_encode($data) );
+            $data = implode(",", $tempArray);
+			$values = array('meeting_id' => $insertedId,'folder_name' =>$folder_name,'asset_data'=> $data );
 			DB::table('meeting_assets')->insert($values);
 		}
-		        return redirect()->route('create')
+		        return redirect()->route('list')
                         ->with('message','meeting created successfully');
 
     }
+
+    public function edit($id)
+    {
+            $meeting = DB::select('select meetings.id as meetingId, meetings.meeting_name, meetings.meeting_date, meetings.meeting_created_by, meetings.verticals_id, meetings.verticals_id, verticals.id, verticals.vertical_name, sub_verticals.vertical_id, sub_verticals.sub_vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id INNER JOIN sub_verticals ON sub_verticals.vertical_id=verticals.id where meetings.id=?',[$id]);
+            $meeting_assets = DB::select('select * from meeting_assets where meeting_id=?',[$id]);
+            $verticals_list = DB::select('select * from verticals');
+            $verticals_name = DB::select('select * from verticals');
+            $verticals_name = DB::select('select meetings.id, meetings.verticals_id, verticals.id, verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id where meetings.id=?',[$id]);
+            $sub_vertical_name = DB::select('select meetings.id, meetings.sub_verticals_id, sub_verticals.sub_vertical_name FROM meetings INNER JOIN sub_verticals ON meetings.sub_verticals_id=sub_verticals.id where meetings.id=?',[$id]);
+
+            $asset_count = count($meeting_assets);
+            $data = [
+
+                'meeting_data' => $meeting,
+                'meeting_assets' => $meeting_assets,
+                'asset_count' => $asset_count,
+                'verticals_list' => $verticals_list,
+                'verticals_name' => $verticals_name,
+                'sub_vertical_name' => $sub_vertical_name
+            ];
+
+            return view('meeting.edit',$data);
+    }
+
+    public function update_meeting(Request $request)
+    {
+        $meting_id = $request['id'];
+        $meting_name = $request['meeting_name'];
+        $meeting_time = $request['meeting_time'];
+        $meeting_created = $request['meeting_created'];
+        $verticals = $request['verticals'];
+        $subverticals = $request['subverticals'];
+         date_default_timezone_set('Asia/Kolkata');
+                $modify = date("Y-m-d H:i:s");           
+        DB::update('update meetings set meeting_name = ?,meeting_date=?,meeting_created_by=?,verticals_id=?, sub_verticals_id=?,updated_at=? where id = ?',[$meting_name,$meeting_time,$meeting_created,$verticals,$subverticals,$modify, $meting_id]);
+
+        $count = $request['count'];
+
+        for($i=1;$i<=$count;$i++)
+        {
+            $asset_id = $request['asset_id_'.$i];
+            $image_name = DB::select('select asset_data from meeting_assets where id =?',[$asset_id]);
+
+            $files =  $request['files_'.$i];
+            $test = $image_name[0]->asset_data;
+            if(!empty($files))
+            {
+
+            }
+            else
+            {
+                $new_files = $test;
+            }
+            //$new_files = $request['files_'.$i];
+            $asset_id = $request['asset_id_'.$i];
+            $folder_name = $request['folder_name_'.$i];
+            //$imagesNew = implode(",",$new_files);
+            DB::update('update meeting_assets set folder_name = ?, asset_data=?, updated_at=? where id = ?',[$folder_name, $new_files, $modify, $asset_id]);
+
+        }    
+        return redirect()->route('list')->with('message','meeting update successfully');
+    }
+
+
+
+    public function remove_image(Request $request)
+    {
+        $image_name = DB::select('select * from meeting_assets where id =?',[$request->asset_id]);
+
+        $test = $image_name[0]->asset_data;
+        $test1 = explode(",", $test);
+        $image_delete = $request['image_name'];
+        $imagesNew = "";
+        if(count($test1)>1){
+            $temp_arr = array();
+            for($nn=0;$nn<count($test1);$nn++)
+            {
+            if($test1[$nn] != $image_delete)
+            {
+            $temp_arr[] = $test1[$nn];
+            }
+            }
+            $imagesNew = implode(",",$temp_arr);
+        }
+
+        DB::update('update meeting_assets set asset_data = ? where id = ?',[$imagesNew, $request->asset_id]);
+
+    }
+
 
     public function fetch_sub_vertical(Request $request)
     {

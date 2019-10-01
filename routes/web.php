@@ -30,6 +30,11 @@ Route::get('/meeting_list', 'MeetingController@index')->name('list');
 
 Route::get('/create', 'MeetingController@create')->name('create');
 Route::post('/save_data', 'MeetingController@save_data')->name('save_data');
+Route::get('/edit/{id}', 'MeetingController@edit')->name('edit');
+Route::post('/update', 'MeetingController@update_meeting')->name('update_meeting');
+
+Route::post('/remove_image', 'MeetingController@remove_image')->name('remove_image');
+
 
 Route::get('/verticals_list', 'VerticalsController@index')->name('list_vertical');
 Route::post('/save_verticals', 'VerticalsController@save_vertical')->name('save_vertical');
