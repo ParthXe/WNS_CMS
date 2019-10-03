@@ -63,10 +63,10 @@
                                         <td>{{ $meeting->meeting_date }}</td>
 
                                         <td>
-                                            <a href="" class="btn btn-xs btn-default">
+                                            <a href="/edit/{{ $meeting->meetingId }}" class="btn btn-xs btn-default">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="" class="btn btn-xs btn-danger">
+                                            <a href="/delete/{{ $meeting->meetingId }}" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>

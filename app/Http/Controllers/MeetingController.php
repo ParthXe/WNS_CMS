@@ -115,29 +115,54 @@ class MeetingController extends Controller
         DB::update('update meetings set meeting_name = ?,meeting_date=?,meeting_created_by=?,verticals_id=?, sub_verticals_id=?,updated_at=? where id = ?',[$meting_name,$meeting_time,$meeting_created,$verticals,$subverticals,$modify, $meting_id]);
 
         $count = $request['count'];
-
-        for($i=1;$i<=$count;$i++)
+        $prevcount = $request['prevcount'];
+        if($count<$prevcount)
         {
-            $asset_id = $request['asset_id_'.$i];
-            $image_name = DB::select('select asset_data from meeting_assets where id =?',[$asset_id]);
-
-            $files =  $request['files_'.$i];
-            $test = $image_name[0]->asset_data;
-            if(!empty($files))
+            for($i=1;$i<=$count;$i++)
             {
+                $asset_id = $request['asset_id_'.$i];
+                $folder_name = $request['folder_name_'.$i];
+                $files =  $request['files_'.$i];
 
+                $this->edit_update_record($asset_id,$folder_name,$files,$modify);
             }
-            else
+
+        }  
+        else
+        {
+            $prev_plus = $prevcount+1;
+            for ($q=$prev_plus; $q <= $count ; $q++) 
             {
-                $new_files = $test;
-            }
-            //$new_files = $request['files_'.$i];
-            $asset_id = $request['asset_id_'.$i];
-            $folder_name = $request['folder_name_'.$i];
-            //$imagesNew = implode(",",$new_files);
-            DB::update('update meeting_assets set folder_name = ?, asset_data=?, updated_at=? where id = ?',[$folder_name, $new_files, $modify, $asset_id]);
+                $folder_name1 =  $request['folder_name_'.$q];
+                //echo 'Ashish'.$folder_name;
+                $path = public_path().'/uploads/meeting/' . $folder_name1;
+                $fpath = File::makeDirectory($path, $mode = 0777, true, true);
+                $files =  $request->file('files_'.$q);
+                
+                $tempArray =  array();
+                $data =  array();
+                foreach($files as $file)
+                {
 
-        }    
+                    $name=$file->getClientOriginalName();
+                    $file->move($path, $name);  
+                    $tempArray[] = $name;  
+                }
+                $data = implode(",", $tempArray);
+                $values = array('meeting_id' => $meting_id,'folder_name' =>$folder_name1,'asset_data'=> $data );
+                DB::table('meeting_assets')->insert($values);
+            }
+
+            for($i=1;$i<=$prevcount;$i++)
+            {
+                $asset_id = $request['asset_id_'.$i];
+                $folder_name = $request['folder_name_'.$i];
+                $files =  $request['files_'.$i];
+
+                $this->edit_update_record($asset_id,$folder_name,$files,$modify);
+
+            }   
+        }
         return redirect()->route('list')->with('message','meeting update successfully');
     }
 
@@ -181,5 +206,51 @@ class MeetingController extends Controller
 
 				return response()->json($response);
 	    
+    }
+
+
+    public function edit_update_record($asset_id,$folder_name,$files,$modify)
+    {
+
+                $image_name = DB::select('select asset_data from meeting_assets where id =?',[$asset_id]);
+                $test = $image_name[0]->asset_data;
+                $prev_img= array();
+
+                if(!empty($files))
+                {
+                $prev_img = explode(',', $test);  
+                $path = public_path().'/uploads/meeting/' . $folder_name;
+
+                $tempArray =  array();
+                $data =  array();
+                foreach($files as $file)
+                {
+
+                $name=$file->getClientOriginalName();
+                $file->move($path, $name);  
+                $tempArray[] = $name;  
+                }
+                    $image_new =  array_merge($prev_img,$tempArray);
+                    $new_files = implode(',', $image_new);
+                }
+                else
+                {
+                    $new_files = $test;
+                }
+                //$new_files = $request['files_'.$i];
+                //$asset_id = $request['asset_id_'.$i];
+                
+                //$imagesNew = implode(",",$new_files);
+                DB::update('update meeting_assets set folder_name = ?, asset_data=?, updated_at=? where id = ?',[$folder_name, $new_files, $modify, $asset_id]);
+    }
+
+
+    public function destroy($id)
+    {
+        DB::table('meetings')->where('id', $id)->delete();
+        DB::table('meeting_assets')->where('meeting_id', $id)->delete();
+
+         return redirect()->route('list')
+                        ->with('message','Deleted successfully');
     }
 }

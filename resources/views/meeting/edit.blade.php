@@ -158,7 +158,7 @@ function imageRemove(img,id)
                         @csrf
 
                     <div class="form-group {{ $errors->has('meeting_name') ? 'has-error' : '' }}">
-                          <label for="userEditMobile">Meeing Name</label>
+                          <label for="userEditMobile">Meeting Name</label>
                           <input type="text" class="form-control @error('meeting_name') is-invalid @enderror" name="meeting_name" value="{{ $meeting_data[0]->meeting_name }}" required autocomplete="name">
                           <input id="projects_sl" type="hidden" class="form-control @error('meeting_name') is-invalid @enderror" name="id" value="{{ $meeting_data[0]->id }}">
 
@@ -167,7 +167,7 @@ function imageRemove(img,id)
                         @endif
                     </div>
                     <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
-                      <label for="userEditMobile">Meeing Date</label>
+                      <label for="userEditMobile">Meeting Date</label>
                        <input type="text" class="form-control @error('meeting_time') is-invalid @enderror" name="meeting_time" value="{{ $meeting_data[0]->meeting_date }}" required autocomplete="name" id="datetimepicker4">
 
                         @if($errors->has('meeting_time'))
@@ -175,7 +175,7 @@ function imageRemove(img,id)
                         @endif
                     </div>
                     <div class="form-group">
-                      <label for="userEditMobile">Meeing Created</label>
+                      <label for="userEditMobile">Meeting Created</label>
                         <input type="text" class="form-control" name="meeting_created" value="{{ $meeting_data[0]->meeting_created_by }}" readonly>
                     </div>
                     <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
@@ -220,11 +220,24 @@ function imageRemove(img,id)
                           <input type="file" class="form-control" name="files_{{$i}}[]" placeholder="Trends Title" value="" multiple>
                           <?php
                           $array = explode(',', $value->asset_data);
-                          $path = URL::to('/').'/uploads/meeting/'.$value->folder_name.'/';
+                          $path = URL::to('/').'/uploads/meeting/'.$value->folder_name.'/'; 
                           foreach($array as $asset)
                           {
+                            $ext = pathinfo($asset, PATHINFO_EXTENSION);
+                            if($ext=='jpg' || $ext=='jpeg')
+                            {
+                              echo '<img src="'.$path.$asset.'" width="200px" style="padding:10px; top="0px"><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                            }
+                            elseif ($ext=='pdf') {
+                             echo '<b style="padding:10px">'.$asset.'</b><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                            }
+                            elseif ($ext=='mp4') {
+                             echo '<video width="200" height="150" controls style="padding:10px">
+                              <source src="'.$path.$asset.'" type="video/mp4">
+                            </video><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                            }
+
                             
-                            echo '<img src="'.$path.$asset.'" width="100px" style="padding:10px"><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
                           }
                            ?>
                         </div>
@@ -263,8 +276,9 @@ function imageRemove(img,id)
                   </div>
 
                   <div class="form-group">
-                    <button type="button" onClick="incrementValue()" class="btn btn-success addButton">Add Folder</button>
+                    <button type="button" class="btn btn-success addButton">Add Folder</button>
                     <input type="hidden" id="rowNumber" name="count" value="{{$asset_count}}"/>
+                    <input type="hidden" id="rowNumber1" name="prevcount" value="{{$asset_count}}"/>
                   </div>
                 </div>
 

@@ -33,11 +33,17 @@ Route::post('/save_data', 'MeetingController@save_data')->name('save_data');
 Route::get('/edit/{id}', 'MeetingController@edit')->name('edit');
 Route::post('/update', 'MeetingController@update_meeting')->name('update_meeting');
 
+Route::get('/delete/{id}', 'MeetingController@destroy')->name('destroy');
+
 Route::post('/remove_image', 'MeetingController@remove_image')->name('remove_image');
 
 
 Route::get('/verticals_list', 'VerticalsController@index')->name('list_vertical');
 Route::post('/save_verticals', 'VerticalsController@save_vertical')->name('save_vertical');
 Route::get('/create_vertical', 'VerticalsController@create_vertical')->name('create_vertical');
+Route::get('/edit_vertical/{id}', 'VerticalsController@edit_vertical')->name('edit_vertical');
+Route::post('/update_vertical', 'VerticalsController@update_vertical')->name('update_vertical');
+
+
 Route::post('/fetch_vertical', 'MeetingController@fetch_sub_vertical')->name('fetch_sub_vertical');
 
