@@ -81,12 +81,11 @@ class MeetingController extends Controller
 
     public function edit($id)
     {
-            $meeting = DB::select('select meetings.id as meetingId, meetings.meeting_name, meetings.meeting_date, meetings.meeting_created_by, meetings.verticals_id, meetings.verticals_id, verticals.id, verticals.vertical_name, sub_verticals.vertical_id, sub_verticals.sub_vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id INNER JOIN sub_verticals ON sub_verticals.vertical_id=verticals.id where meetings.id=?',[$id]);
+            $meeting = DB::select('select meetings.id as meetingId, meetings.meeting_name, meetings.meeting_date, meetings.meeting_created_by, meetings.verticals_id,meetings.sub_verticals_id as sub_vertical_name , verticals.id, verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id where meetings.id=?',[$id]);
             $meeting_assets = DB::select('select * from meeting_assets where meeting_id=?',[$id]);
             $verticals_list = DB::select('select * from verticals');
             $verticals_name = DB::select('select * from verticals');
             $verticals_name = DB::select('select meetings.id, meetings.verticals_id, verticals.id, verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id where meetings.id=?',[$id]);
-            $sub_vertical_name = DB::select('select meetings.id, meetings.sub_verticals_id, sub_verticals.sub_vertical_name FROM meetings INNER JOIN sub_verticals ON meetings.sub_verticals_id=sub_verticals.id where meetings.id=?',[$id]);
 
             $asset_count = count($meeting_assets);
             $data = [
@@ -95,8 +94,7 @@ class MeetingController extends Controller
                 'meeting_assets' => $meeting_assets,
                 'asset_count' => $asset_count,
                 'verticals_list' => $verticals_list,
-                'verticals_name' => $verticals_name,
-                'sub_vertical_name' => $sub_vertical_name
+                'verticals_name' => $verticals_name
             ];
 
             return view('meeting.edit',$data);
@@ -197,7 +195,7 @@ class MeetingController extends Controller
     {
     	
 
-	 	$sub_verticals = DB::select('select * from sub_verticals where vertical_id= ?', [$request->message]);
+	 	$sub_verticals = DB::select('select sub_vertical_name from verticals where id= ?', [$request->message]);
     		 	$response = array(
           'status' => 'success',
           'sub_verticals' => $sub_verticals,

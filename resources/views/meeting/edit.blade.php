@@ -3,8 +3,10 @@
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
- <script>
-   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+<script type="text/javascript">
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+   
     $(document).ready(function()
                      {
         $("#fetchval").on('change',function()
@@ -14,7 +16,7 @@
             $.ajax(
             {
 
-                url:"{{ route('fetch_sub_vertical') }}",
+                url:"/fetch_vertical",
                 type:'POST',
                 //data:'test='+keyword,
                 //dataType: 'JSON',
@@ -29,14 +31,15 @@
                 {
                   var div1,name,sid;
                     //console.log(data);
-                    var len=data.sub_verticals.length;
-                    //console.log(len);
+                    var name1 = data.sub_verticals[0]['sub_vertical_name'];
+                    var fname = name1.split(",");
+                    var len=fname.length;
+                    //console.log(fname);
                     var div = document.getElementById('subverticals');
                     for(var i=0;i<len;i++)
                     {
-                       name = data.sub_verticals[i].sub_vertical_name;
-                       sid = data.sub_verticals[i].id;
-                       div1 +='<option value="'+sid+'">'+name+'</option>';
+                       name = fname[i];
+                       div1 +='<option value="'+name+'">'+name+'</option>';
                        
                     } 
                     //console.log(div1);
@@ -160,7 +163,7 @@ function imageRemove(img,id)
                     <div class="form-group {{ $errors->has('meeting_name') ? 'has-error' : '' }}">
                           <label for="userEditMobile">Meeting Name</label>
                           <input type="text" class="form-control @error('meeting_name') is-invalid @enderror" name="meeting_name" value="{{ $meeting_data[0]->meeting_name }}" required autocomplete="name">
-                          <input id="projects_sl" type="hidden" class="form-control @error('meeting_name') is-invalid @enderror" name="id" value="{{ $meeting_data[0]->id }}">
+                          <input id="projects_sl" type="hidden" class="form-control @error('meeting_name') is-invalid @enderror" name="id" value="{{ $meeting_data[0]->meetingId }}">
 
                         @if($errors->has('meeting_name'))
                             <span class="help-block">{{ $errors->first('meeting_name') }}</span>
@@ -194,7 +197,7 @@ function imageRemove(img,id)
                     <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                         {!! Form::label('Subverticals:') !!}
                         <select id="subverticals" class="fetchval btn dropdown-toggle form-control" id="project_id" name="subverticals">
-                         <option value="{{ $sub_vertical_name[0]->sub_verticals_id }}" {{ ( $sub_vertical_name[0]->sub_vertical_name == $sub_vertical_name[0]->sub_vertical_name ) ? 'selected' : '' }}>{{ $sub_vertical_name[0]->sub_vertical_name }}</option>       
+                         <option value="{{ $meeting_data[0]->sub_vertical_name }}" {{ ( $meeting_data[0]->sub_vertical_name == $meeting_data[0]->sub_vertical_name ) ? 'selected' : '' }}>{{ $meeting_data[0]->sub_vertical_name }}</option>       
                         </select>
                         
                     </div>

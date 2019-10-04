@@ -43,7 +43,7 @@ Route::post('/save_verticals', 'VerticalsController@save_vertical')->name('save_
 Route::get('/create_vertical', 'VerticalsController@create_vertical')->name('create_vertical');
 Route::get('/edit_vertical/{id}', 'VerticalsController@edit_vertical')->name('edit_vertical');
 Route::post('/update_vertical', 'VerticalsController@update_vertical')->name('update_vertical');
-
+Route::get('/delete/{id}', 'VerticalsController@destroy')->name('destroy');
 
 Route::post('/fetch_vertical', 'MeetingController@fetch_sub_vertical')->name('fetch_sub_vertical');
 

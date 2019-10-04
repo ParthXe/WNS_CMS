@@ -32,19 +32,10 @@ class VerticalsController extends Controller
 
 		$verticals= new verticals();
 		$verticals->vertical_name= $request['vertical_name'];
-
-
-		$verticals->save();
-
-		$insertedId = $verticals->id;
-
-		//echo $insertedId;
 		$field_values_array = $request['sub_verticals_name'];
-		foreach($field_values_array as $value){
-    	// Your database query goes here
-		$values = array('vertical_id' => $insertedId,'sub_vertical_name' =>$value );
-		DB::table('sub_verticals')->insert($values);
-		}
+		$sub_verticals = implode(',', $field_values_array);
+		$verticals->sub_vertical_name = $sub_verticals;
+		$verticals->save();
 
 
         return redirect()->route('create_vertical')->with('message','meeting create successfully');
@@ -53,7 +44,7 @@ class VerticalsController extends Controller
 
     public function edit_vertical($id)
     {
-    	$vertical = DB::select('select verticals.id as vId, verticals.vertical_name, sub_verticals.id as sId, sub_verticals.sub_vertical_name FROM verticals INNER JOIN sub_verticals ON verticals.id=sub_verticals.vertical_id where verticals.id=?',[$id]);
+    	$vertical = DB::select('select * from verticals where id=?',[$id]);
     	$vertical_count = count($vertical);
     		$data= [
     			'vertical_data' => $vertical,
@@ -67,45 +58,18 @@ class VerticalsController extends Controller
     {
     	$id = $request['id'];
     	$vName = $request['vertical_name'];
-    	$curCount = $request['curCount'];
-    	$prev = $request['prev'];
-    	DB::update('update verticals set vertical_name = ? where id = ?',[$vName,$id]);
-    	$field_values_array = $request['sub_verticals_name'];
-    	if($prev<$curCount)
-    	{
-    		
+		$field_values_array = $request['sub_verticals_name'];
+		$sub_verticals = implode(',', $field_values_array);
+		DB::update('update verticals set vertical_name = ?, sub_vertical_name = ? where id = ?',[$vName,$sub_verticals,$id]);
 
-			    		$prev_plus = $prev+1;
-	
-					//echo $insertedId;
-				$field_values_array = $request['sub_verticals_name'];
-				foreach($field_values_array as $value){
-		    	// Your database query goes here
-				$values = array('vertical_id' => $id,'sub_vertical_name' =>$value );
-				DB::table('sub_verticals')->insert($values);
-				}
-		
-            	$q=$prev;
-            	foreach($field_values_array as $key => $value){
-		    	// Your database query goes here
-				DB::update('update sub_verticals set sub_vertical_name = ? where id = ?',[$value,$q]);
-				$q++;
-				}
-            
-	
-    	}
-    	else
-    	{
-    		$i=1;
+    }
+
+    public function destroy($id)
+    {
+			DB::table('verticals')->where('id', $id)->delete();
 			
-			foreach($field_values_array as $key => $value){
-			// Your database query goes here
-			DB::update('update sub_verticals set sub_vertical_name = ? where id = ?',[$value,$i]);
-			//echo $query;
-			$i++;
-			}
 
-    	}
-		
+			return redirect()->route('list')
+			->with('message','Deleted successfully');
     }
 }

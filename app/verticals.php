@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class verticals extends Model
 {
         protected $fillable = [
-		'vertical_name'          
+		'vertical_name',
+		'sub_vertical_name'            
           // add all other fields
     ];
 

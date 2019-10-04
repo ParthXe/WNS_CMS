@@ -59,10 +59,10 @@
                                         <td>{{ $vertical->vertical_name }}</td>
 
                                         <td>
-                                            <a href="" class="btn btn-xs btn-default">
+                                            <a href="/edit_vertical/{{ $vertical->id }}" class="btn btn-xs btn-default">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="" class="btn btn-xs btn-danger">
+                                            <a href="/delete/{{ $vertical->id }}" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>

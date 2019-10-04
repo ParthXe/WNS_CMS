@@ -30,7 +30,7 @@
 
                          <label for="userEditMobile">Vertical Name</label>
                           <input type="text" class="form-control @error('vertical_name') is-invalid @enderror" name="vertical_name" value="{{ $vertical_data[0]->vertical_name }}" required autocomplete="name">
-                          <input id="projects_sl" type="hidden" class="form-control @error('vertical_name') is-invalid @enderror" name="id" value="{{ $vertical_data[0]->vId }}">
+                          <input id="projects_sl" type="hidden" class="form-control @error('vertical_name') is-invalid @enderror" name="id" value="{{ $vertical_data[0]->id }}">
 
                         @if($errors->has('vertical_name'))
                             <span class="help-block">{{ $errors->first('vertical_name') }}</span>
@@ -42,11 +42,12 @@
                           
                        <div class="field_wrapper">
                         <div style="visibility: hidden;">{{ $i=1 }}</div> 
-                        @foreach($vertical_data as $key => $value)
+                        <?php $sub_vertical = explode(',', $vertical_data[0]->sub_vertical_name); ?>
+                        @foreach($sub_vertical as $value)
                         
                           <div>
-                        <input type="text" name="sub_verticals_name[]" value="{{ $value->sub_vertical_name }}"/><a href="javascript:void(0);" class="remove_button">
-                          <input type="hidden" class="form-control" name="sid_{{$i}}" value="{{ $vertical_data[0]->sId }}">
+                        <input type="text" name="sub_verticals_name[]" value="{{ $value }}"/><a href="javascript:void(0);" class="remove_button">
+                          
                           <img src="http://192.168.0.111:8000/dist/images/remove-icon.png"></a><br>
                         </div>
                          <div style="visibility: hidden;">{{ $i++ }}</div>
