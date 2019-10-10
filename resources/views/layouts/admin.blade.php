@@ -21,17 +21,26 @@
 
   <link rel="stylesheet" href="{{ asset('js/jvectormap/jquery-jvectormap-1.2.2.css') }}">
   <!-- Datetime picker -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="{{ asset('dist/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 <!-- datepicker -->
   <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="{{ asset('plugins/timepicker/jquery.timepicker.min.js') }}"></script>
+  <style type="text/css">
+    .navbar{
+          padding-bottom: 20px;
+          margin-bottom: 0;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -54,8 +63,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{ asset('dist/images/Logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
-      <span class="brand-text font-weight-light" style="margin-left: 10%;"><img src="{{ asset('dist/images/wns-logo.png')}}" alt="AdminLTE Logo" align="middle" style="width: 40%;margin-top: -10px;"></span>
+      <img style="margin-top: 20px;" src="{{ asset('dist/images/Logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+      <span class="brand-text font-weight-light" style="margin-left: 10%;"><img src="{{ asset('dist/images/WNS Logo.png')}}" alt="AdminLTE Logo" align="middle" style="width: 40%;margin-top: 20px;"></span>
     </a>
 
     <!-- Sidebar -->
@@ -122,7 +131,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ Request::is('list','create') ? 'active' : '' }}">
               <i class="nav-icon fa fa-folder"></i>
               <p>
                 Meeting
@@ -131,13 +140,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('create') }}" class="nav-link">
+                <a href="{{ route('create') }}" class="nav-link {{ Request::is('create') ? 'active' : '' }}">
                   <i class="fa fa-image nav-icon"></i>
                   <p>Create meeting</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('list') }}" class="nav-link">
+                <a href="{{ route('list') }}" class="nav-link {{ Request::is('list') ? 'active' : '' }}">
                   <i class="fa fa-film nav-icon"></i>
                   <p>Meeting List</p>
                 </a>

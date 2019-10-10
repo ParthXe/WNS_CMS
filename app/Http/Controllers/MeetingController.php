@@ -251,4 +251,61 @@ class MeetingController extends Controller
          return redirect()->route('list')
                         ->with('message','Deleted successfully');
     }
+
+    public function meeting_data($id)
+    {
+                   $meeting = DB::select('select meetings.id as meetingId, meetings.meeting_name, meetings.meeting_date, meetings.meeting_created_by,meetings.sub_verticals_id as sub_vertical_name , verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id where meetings.id=?',[$id]);
+            $meeting_assets = DB::select('select * from meeting_assets where meeting_id=?',[$id]);
+            $verticals_list = DB::select('select * from verticals');
+            $verticals_name = DB::select('select * from verticals');
+            $verticals_name = DB::select('select meetings.id, meetings.verticals_id, verticals.id, verticals.vertical_name FROM meetings INNER JOIN verticals ON meetings.verticals_id=verticals.id where meetings.id=?',[$id]);
+           
+            $asset_count = count($meeting_assets);
+            $main_array = array();
+            $name_array = array();
+
+
+            foreach ($meeting_assets as $key => $value) {
+               $asset_name = $this->asset_explode($value->asset_data,$value->folder_name);
+               $asset_array['folder_name'] = $value->folder_name;
+               $asset_array['Assets'] = $asset_name;
+              
+               $main_array[] = $asset_array;
+
+            }
+            //$data = array_merge($meeting,$main_array);
+            $data[] = [
+                'meeting_data' => $meeting,
+                'Folder'=> $main_array
+                // 'meeting_data' => $meeting,
+                // 'meeting_assets' => $meeting_assets,
+                // 'url' => $url
+               // 'asset_count' => $asset_count,
+                //'verticals_list' => $verticals_list,
+                //'verticals_name' => $verticals_name
+            ];
+
+            return json_encode($data);
+    }
+    public function meeting_list()
+    {
+        $meeting_list = DB::select('select * FROM meetings');
+
+        return json_encode($meeting_list);
+    }
+   public function asset_explode($string,$name)
+   {
+     $url =  url('/');   
+     $path = $url.'/uploads/meeting/'.$name.'/';
+     $name = explode(",", $string);
+     $fname = array();
+     foreach ($name as $value) {
+         $fname[] = array(
+            "asset_name"=>$value,
+            "asset_path"=>$path.$value
+            );
+     }
+
+     return $fname;
+   } 
 }

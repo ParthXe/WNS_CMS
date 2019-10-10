@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMeetingAssetsTable extends Migration
+class CreateLivePolling extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateMeetingAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('meeting_assets', function (Blueprint $table) {
+        Schema::create('live_polling', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('meeting_id');
-            $table->string('folder_name');
-            $table->string('asset_data');
+            $table->string('question');
+            $table->string('optionA');
+            $table->string('optionB');
+            $table->string('optionC');
+            $table->string('optionD');
+            $table->string('optionE');
+            $table->string('active');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateMeetingAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meeting_assets');
+        Schema::dropIfExists('live_polling');
     }
 }

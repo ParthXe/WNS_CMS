@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2>Home</h2>
+<img src="{{ asset('dist/images/1.jpg') }}">
 @endsection

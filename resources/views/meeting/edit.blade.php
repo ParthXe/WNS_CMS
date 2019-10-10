@@ -118,7 +118,7 @@ function imageRemove(img,id)
         url:"{{ route('remove_image') }}",
         data: {_token: CSRF_TOKEN, image_name:img, asset_id:id},
          success: function(data){
-              alert(data);
+              alert("Deleted Succesfully");
                  location.reload();
               }
           });
@@ -128,7 +128,7 @@ function imageRemove(img,id)
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+       <!--  <h1>
           Blog
           <small>Add new post</small>
         </h1>
@@ -137,7 +137,7 @@ function imageRemove(img,id)
               <a href=""><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
           <li><a href="">Blog</a></li>
-          <li class="active">Add new</li>
+          <li class="active">Add new</li> -->
                      <!-- /.box-header -->
           <div class="box-body ">
               @if(session('message'))
@@ -160,30 +160,30 @@ function imageRemove(img,id)
                    <form method="POST" action="{{ route('update_meeting') }}" enctype="multipart/form-data">
                         @csrf
 
-                    <div class="form-group {{ $errors->has('meeting_name') ? 'has-error' : '' }}">
+                    <div class="wrap-input100 {{ $errors->has('meeting_name') ? 'has-error' : '' }}">
                           <label for="userEditMobile">Meeting Name</label>
-                          <input type="text" class="form-control @error('meeting_name') is-invalid @enderror" name="meeting_name" value="{{ $meeting_data[0]->meeting_name }}" required autocomplete="name">
-                          <input id="projects_sl" type="hidden" class="form-control @error('meeting_name') is-invalid @enderror" name="id" value="{{ $meeting_data[0]->meetingId }}">
+                          <input type="text" class="input100 @error('meeting_name') is-invalid @enderror" name="meeting_name" value="{{ $meeting_data[0]->meeting_name }}" required autocomplete="name">
+                          <input id="projects_sl" type="hidden" class="input100 @error('meeting_name') is-invalid @enderror" name="id" value="{{ $meeting_data[0]->meetingId }}">
 
                         @if($errors->has('meeting_name'))
                             <span class="help-block">{{ $errors->first('meeting_name') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
+                    <div class="wrap-input100 {{ $errors->has('slug') ? 'has-error' : '' }}">
                       <label for="userEditMobile">Meeting Date</label>
-                       <input type="text" class="form-control @error('meeting_time') is-invalid @enderror" name="meeting_time" value="{{ $meeting_data[0]->meeting_date }}" required autocomplete="name" id="datetimepicker4">
+                       <input type="text" class="input100 @error('meeting_time') is-invalid @enderror" name="meeting_time" value="{{ $meeting_data[0]->meeting_date }}" required autocomplete="name" id="datetimepicker4">
 
                         @if($errors->has('meeting_time'))
                             <span class="help-block">{{ $errors->first('meeting_time') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="wrap-input100">
                       <label for="userEditMobile">Meeting Created</label>
-                        <input type="text" class="form-control" name="meeting_created" value="{{ $meeting_data[0]->meeting_created_by }}" readonly>
+                        <input type="text" class="input100" name="meeting_created" value="{{ $meeting_data[0]->meeting_created_by }}" readonly>
                     </div>
-                    <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
+                    <div class="wrap-input100 {{ $errors->has('body') ? 'has-error' : '' }}">
                         {!! Form::label('Verticals:') !!}
-                              <select id="fetchval" class="fetchval btn dropdown-toggle form-control" id="project_id" name="verticals">
+                              <select id="fetchval" class="fetchval btn dropdown-toggle input100" id="project_id" name="verticals">
                                  <option value="{{ $verticals_name[0]->verticals_id }}" {{ ( $verticals_name[0]->vertical_name == $verticals_name[0]->vertical_name ) ? 'selected' : '' }}>{{ $verticals_name[0]->vertical_name }}</option>
                                 @foreach ($verticals_list as $vertical)
                                         <option value="{{ $vertical->id }}">{{ $vertical->vertical_name }}</option>
@@ -194,9 +194,9 @@ function imageRemove(img,id)
                             <span class="help-block">{{ $errors->first('verticals') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                    <div class="wrap-input100 {{ $errors->has('published_at') ? 'has-error' : '' }}">
                         {!! Form::label('Subverticals:') !!}
-                        <select id="subverticals" class="fetchval btn dropdown-toggle form-control" id="project_id" name="subverticals">
+                        <select id="subverticals" class="fetchval btn dropdown-toggle input100" id="project_id" name="subverticals">
                          <option value="{{ $meeting_data[0]->sub_vertical_name }}" {{ ( $meeting_data[0]->sub_vertical_name == $meeting_data[0]->sub_vertical_name ) ? 'selected' : '' }}>{{ $meeting_data[0]->sub_vertical_name }}</option>       
                         </select>
                         
@@ -213,17 +213,18 @@ function imageRemove(img,id)
                       @foreach($meeting_assets as $key => $value)
                      
                       <div class="box-body">
-                        <div class="form-group">
+                        <div class="wrap-input100">
                           <label for="userEditMobile">Folder Name</label>
-                          <input type="text" class="form-control" name="folder_name_{{$i}}" value="{{$value->folder_name}}" >
-                          <input type="hidden" class="form-control" name="asset_id_{{$i}}" value="{{ $value->id }}">
+                          <input type="text" class="input100" name="folder_name_{{$i}}" value="{{$value->folder_name}}" >
+                          <input type="hidden" class="input100" name="asset_id_{{$i}}" value="{{ $value->id }}">
                         </div>  
-                        <div class="form-group">
+                        <div class="wrap-input100">
                           <label for="userEditMobile">Meeting Assets</label>
-                          <input type="file" class="form-control" name="files_{{$i}}[]" placeholder="Trends Title" value="" multiple>
+                          <input type="file" class="input100" name="files_{{$i}}[]" placeholder="Trends Title" value="" multiple>
                           <?php
                           $array = explode(',', $value->asset_data);
                           $path = URL::to('/').'/uploads/meeting/'.$value->folder_name.'/'; 
+                          
                           foreach($array as $asset)
                           {
                             $ext = pathinfo($asset, PATHINFO_EXTENSION);
@@ -232,7 +233,7 @@ function imageRemove(img,id)
                               echo '<img src="'.$path.$asset.'" width="200px" style="padding:10px; top="0px"><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
                             }
                             elseif ($ext=='pdf') {
-                             echo '<b style="padding:10px">'.$asset.'</b><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                             echo '<span><img src="'.URL::to('/').'/dist/images/625px-PDF_file_icon.png'.'" width="100px" style="padding:10px; top="0px"><a href="#" onclick="imageRemove('."'".$asset."'".','."'".$value->id."'".')"><i class="fa fa-times" aria-hidden="true"></i></a><br><b style="padding:10px">'.$asset.'</b></span>';
                             }
                             elseif ($ext=='mp4') {
                              echo '<video width="200" height="150" controls style="padding:10px">
@@ -262,13 +263,13 @@ function imageRemove(img,id)
                         </div>                
                     <div class="box box-solid">
                       <div class="box-body">
-                        <div class="form-group">
+                        <div class="wrap-input100">
                           <label for="userEditMobile">Folder Name</label>
-                          <input type="text" class="form-control" name="folder_name" value="" >
+                          <input type="text" class="input100" name="folder_name" value="" >
                         </div>  
-                        <div class="form-group">
+                        <div class="wrap-input100">
                           <label for="userEditMobile">Meeting Assets</label>
-                          <input type="file" class="form-control" name="files[]" placeholder="Trends Title" value="" multiple>
+                          <input type="file" class="input100" name="files[]" placeholder="Trends Title" value="" multiple>
                         </div>
 
                         <div class="form-group col-sm-12">
@@ -287,7 +288,7 @@ function imageRemove(img,id)
 
                     <hr>
 
-          {!! Form::submit('Update meeting',['class'=>'btn btn-primary']) !!}
+          {!! Form::submit('Update meeting',['class'=>'btn sbm_btn']) !!}
           {!! Form::close() !!}
                 </div>
                 <!-- /.box-body -->

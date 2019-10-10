@@ -5,7 +5,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+      <!--   <h1>
           Blog
           <small>Add new post</small>
         </h1>
@@ -15,7 +15,7 @@
           </li>
           <li><a href="">Blog</a></li>
           <li class="active">Add new</li>
-        </ol>
+        </ol> -->
       </section>
 
       <!-- Main content -->
@@ -26,10 +26,10 @@
                 <div class="box-body ">
                     {!! Form::open(['url' => '/update_vertical','method'=>'post']) !!}
 
-                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+                    <div class="wrap-input100 {{ $errors->has('title') ? 'has-error' : '' }}">
 
-                         <label for="userEditMobile">Vertical Name</label>
-                          <input type="text" class="form-control @error('vertical_name') is-invalid @enderror" name="vertical_name" value="{{ $vertical_data[0]->vertical_name }}" required autocomplete="name">
+                        
+                          <input type="text" class="input100 @error('vertical_name') is-invalid @enderror" name="vertical_name" value="{{ $vertical_data[0]->vertical_name }}" required autocomplete="name" placeholder="Vertical Name">
                           <input id="projects_sl" type="hidden" class="form-control @error('vertical_name') is-invalid @enderror" name="id" value="{{ $vertical_data[0]->id }}">
 
                         @if($errors->has('vertical_name'))
@@ -46,7 +46,7 @@
                         @foreach($sub_vertical as $value)
                         
                           <div>
-                        <input type="text" name="sub_verticals_name[]" value="{{ $value }}"/><a href="javascript:void(0);" class="remove_button">
+                        <input type="text" name="sub_verticals_name[]" class="" value="{{ $value }}"/><a href="javascript:void(0);" class="remove_button">
                           
                           <img src="http://192.168.0.111:8000/dist/images/remove-icon.png"></a><br>
                         </div>
@@ -62,9 +62,9 @@
                         @endif
                     </div>
 
-                    <hr>
+                    <br>
 
-            					{!! Form::submit('create new meeting',['class'=>'btn btn-primary']) !!}
+            					{!! Form::submit('update vertical',['class'=>'btn sbm_btn']) !!}
             					{!! Form::close() !!}
                 </div>
                 <!-- /.box-body -->
@@ -81,7 +81,7 @@
         var maxField = 10; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
         var wrapper = $('.field_wrapper'); //Input field wrapper
-        var fieldHTML = '<div><input type="text" name="sub_verticals_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src='+"{{ asset('dist/images/remove-icon.png') }}"+' ></a></div>'; //New input field html 
+        var fieldHTML = '<div><input type="text" name="sub_verticals_name[]" class="input100" value=""/><a href="javascript:void(0);" class="remove_button"><img src='+"{{ asset('dist/images/remove-icon.png') }}"+' ></a></div>'; //New input field html 
         var x = 1; //Initial field counter is 1
          var curCount = $('#rowNumber').val();
          console.log(curCount);

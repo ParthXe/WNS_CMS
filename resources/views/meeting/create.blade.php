@@ -126,7 +126,7 @@ function imageRemove(img,id)
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+        <!-- <h1>
           Blog
           <small>Add new post</small>
         </h1>
@@ -135,7 +135,7 @@ function imageRemove(img,id)
               <a href=""><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
           <li><a href="">Blog</a></li>
-          <li class="active">Add new</li>
+          <li class="active">Add new</li> -->
 	                	 <!-- /.box-header -->
 	        <div class="box-body ">
 	            @if(session('message'))
@@ -157,29 +157,29 @@ function imageRemove(img,id)
                 <div class="box-body ">
                     {!! Form::open(['url' => '/save_data','method'=>'post','enctype'=>'multipart/form-data']) !!}
 
-                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                        {!! Form::label('Meeting Name:') !!}
-                        {!! Form::text('meeting_name',null,['class' => 'form-control']) !!}
-
+                    <div class="wrap-input100 {{ $errors->has('title') ? 'has-error' : '' }}">
+                        {!! Form::text('meeting_name',null,['class' => 'input100']) !!}
+                        <span class="focus-input100" c data-placeholder="Meeting Name"></span>
                         @if($errors->has('meeting_name'))
                             <span class="help-block">{{ $errors->first('meeting_name') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
-                        {!! Form::label('Meeting Date:') !!}
-                        {!! Form::text('meeting_time',null,['class' => 'form-control','id' => 'datetimepicker4']) !!}
 
+                    <div class="wrap-input100 {{ $errors->has('slug') ? 'has-error' : '' }}">
+                        
+                        {!! Form::text('meeting_time',null,['class' => 'input100','id' => 'datetimepicker4']) !!}
+                        <span class="focus-input100" c data-placeholder="Meeting Date"></span>
                         @if($errors->has('meeting_time'))
                             <span class="help-block">{{ $errors->first('meeting_time') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="wrap-input100">
                         {!! Form::label('Meeting Created By:') !!}
-                        {!! Form::text('meeting_created',Auth::user()->name,['class' => 'form-control','readonly'=>'true']) !!}
+                        {!! Form::text('meeting_created',Auth::user()->name,['class' => 'input100','readonly'=>'true']) !!}
                     </div>
-                    <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
-                        {!! Form::label('Verticals:') !!}
-                              <select id="fetchval" class="fetchval btn dropdown-toggle form-control" id="project_id" name="verticals">
+                    <div class="wrap-input100 {{ $errors->has('body') ? 'has-error' : '' }}">
+                        
+                              <select id="fetchval" class="fetchval btn dropdown-toggle input100" id="project_id" name="verticals">
                               	<option value="">Choose Vertical</option>
                                 @foreach ($verticals_name as $vertical)
                                         <option value="{{ $vertical->id }}">{{ $vertical->vertical_name }}</option>
@@ -190,10 +190,10 @@ function imageRemove(img,id)
                             <span class="help-block">{{ $errors->first('verticals') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                        {!! Form::label('Subverticals:') !!}
-                        <select id="subverticals" class="fetchval btn dropdown-toggle form-control" id="project_id" name="subverticals">
-                              	
+                    <div class="wrap-input100 {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                        
+                        <select id="subverticals" class="fetchval btn dropdown-toggle input100" id="project_id" name="subverticals">
+                         <option value="">Subverticals</option>     	
                         </select>
                         
                     </div>
@@ -205,13 +205,14 @@ function imageRemove(img,id)
 								        </div>								
 										<div class="box box-solid">
 											<div class="box-body">
-												<div class="form-group">
-													<label for="userEditMobile">Folder Name</label>
-													<input type="text" class="form-control" name="folder_name" value="" >
+												<div class="wrap-input100">
+													
+													<input type="text" class="input100" name="folder_name" value="" >
+                          <span class="focus-input100" c data-placeholder="Folder Name"></span>
 												</div>	
-												<div class="form-group">
-													<label for="userEditMobile">Meeting Assets</label>
-													<input type="file" class="form-control" name="files[]" placeholder="Trends Title" value="" multiple>
+												<div class="wrap-input100">
+													
+													<input type="file" class="input100" name="files[]" placeholder="Trends Title" value="" multiple>
 												</div>
 
 												<div class="form-group col-sm-12">
@@ -227,9 +228,9 @@ function imageRemove(img,id)
 									</div>
 								</div>
 
-                    <hr>
+                    <br>
 
-					{!! Form::submit('create new meeting',['class'=>'btn btn-primary']) !!}
+					{!! Form::submit('create new meeting',['class'=>'btn sbm_btn']) !!}
 					{!! Form::close() !!}
                 </div>
                 <!-- /.box-body -->

@@ -5,7 +5,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+       <!--  <h1>
           Blog
           <small>Add new post</small>
         </h1>
@@ -15,7 +15,7 @@
           </li>
           <li><a href="">Blog</a></li>
           <li class="active">Add new</li>
-        </ol>
+        </ol> -->
       </section>
 
       <!-- Main content -->
@@ -26,10 +26,10 @@
                 <div class="box-body ">
                     {!! Form::open(['url' => '/save_verticals','method'=>'post']) !!}
 
-                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                        {!! Form::label('Vertical Name:') !!}
-                        {!! Form::text('vertical_name',null,['class' => 'form-control']) !!}
-
+                    <div class="wrap-input100{{ $errors->has('title') ? 'has-error' : '' }}">
+                        
+                        {!! Form::text('vertical_name',null,['class' => 'input100']) !!}
+                        <span class="focus-input100" c data-placeholder="Vertical Name"></span>
                         @if($errors->has('vertical_name'))
                             <span class="help-block">{{ $errors->first('vertical_name') }}</span>
                         @endif
@@ -46,9 +46,9 @@
                         @endif
                     </div>
 
-                    <hr>
+                    <br>
 
-            					{!! Form::submit('create new meeting',['class'=>'btn btn-primary']) !!}
+            					{!! Form::submit('create new vertical',['class'=>'btn sbm_btn']) !!}
             					{!! Form::close() !!}
                 </div>
                 <!-- /.box-body -->

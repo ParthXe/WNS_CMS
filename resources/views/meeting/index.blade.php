@@ -1,12 +1,21 @@
  
 @extends('layouts.admin')
+<style type="text/css">
+  table{
+  color: #fff !important;
+}
 
+table th{
+  background-color: #C11A2C !important;
+
+}
+</style>
 
 @section('content')
  <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>
+        <!-- <h1>
           Blog
           <small>Display All blog posts</small>
         </h1>
@@ -16,11 +25,11 @@
           </li>
           <li><a href="">Blog</a></li>
           <li class="active">All Meetings</li>
-        </ol>
+        </ol> -->
       </section>
 
       <!-- Main content -->
-      <section class="content">
+      <section class="content" style="width: 1200px">
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
@@ -42,14 +51,14 @@
                             <strong>No record found</strong>
                         </div>
                     @else
-                    <div style="display: none;">{{ $i=1 }}</div>
-                        <table class="table table-bordered">
+                    <div style="visibility: hidden; margin-bottom: 50px;">{{ $i=1 }}</div>
+                        <table class="table table-bordered" >
                             <thead>
                                 <tr>
                                     <th width="80">Sr.</th>
-                                    <th width="120">Meeting Name</th>
-                                    <th width="120">Verticals</th>
-                                    <th width="150">Date</th>
+                                    <th width="500">Meeting Name</th>
+                                    <th width="300">Verticals</th>
+                                    <th width="80">Date</th>
                                      <th width="80">Action</th>
                                 </tr>
                             </thead>
