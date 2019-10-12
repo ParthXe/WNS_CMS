@@ -43,7 +43,7 @@ Route::post('/save_verticals', 'VerticalsController@save_vertical')->name('save_
 Route::get('/create_vertical', 'VerticalsController@create_vertical')->name('create_vertical');
 Route::get('/edit_vertical/{id}', 'VerticalsController@edit_vertical')->name('edit_vertical');
 Route::post('/update_vertical', 'VerticalsController@update_vertical')->name('update_vertical');
-Route::get('/delete/{id}', 'VerticalsController@destroy')->name('destroy');
+Route::get('/delete_vertical/{id}', 'VerticalsController@destroy')->name('destroy');
 
 Route::post('/fetch_vertical', 'MeetingController@fetch_sub_vertical')->name('fetch_sub_vertical');
 
@@ -63,3 +63,14 @@ Route::get('/show_live_polling', 'LivePollingModelController@show_live_polling')
 Route::get('/edit_live_polling/{id}', 'LivePollingModelController@edit_live_polling')->name('edit_live_polling');
 Route::post('/update_live_polling/{id}', 'LivePollingModelController@update_live_polling')->name('update_live_polling');
 Route::get('/delete_live_polling/{id}', 'LivePollingModelController@delete_live_polling')->name('delete_live_polling');
+Route::get('/live_pollings', 'LivePollingModelController@index')->name('live_pollings');
+
+
+// Welcome Message
+
+Route::get('/create_message', 'WelcomeMessageController@create_message')->name('create_message');
+Route::post('/save_message', 'WelcomeMessageController@save_message')->name('save_message');
+Route::get('/message_list', 'WelcomeMessageController@index')->name('message_list');
+Route::get('/edit_message/{id}', 'WelcomeMessageController@edit_message')->name('edit_message');
+Route::post('/update_message', 'WelcomeMessageController@update_message')->name('update_message');
+Route::get('/delete_message/{id}', 'WelcomeMessageController@destroy')->name('destroy');

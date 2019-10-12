@@ -62,7 +62,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ route('home') }}" class="brand-link">
       <img style="margin-top: 20px;" src="{{ asset('dist/images/Logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-light" style="margin-left: 10%;"><img src="{{ asset('dist/images/WNS Logo.png')}}" alt="AdminLTE Logo" align="middle" style="width: 40%;margin-top: 20px;"></span>
     </a>
@@ -242,7 +242,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2019-2020 <a href="#">Kone</a>.</strong>
+    <strong>Copyright &copy; 2019-2020 <a href="#">WNS</a>.</strong>
     All rights reserved.
   </footer>
 

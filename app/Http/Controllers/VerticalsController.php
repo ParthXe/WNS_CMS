@@ -38,7 +38,7 @@ class VerticalsController extends Controller
 		$verticals->save();
 
 
-        return redirect()->route('create_vertical')->with('message','meeting create successfully');
+        return redirect()->route('list_vertical')->with('message','meeting create successfully');
 
     }
 

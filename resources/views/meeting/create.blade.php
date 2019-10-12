@@ -104,10 +104,10 @@ function incrementValue() {
 }
 
 function decrementValue() {
-  var value = parseInt(document.getElementById('number').value, 10);
+  var value = parseInt(document.getElementById('rowNumber').value, 10);
   value = isNaN(value) ? 0 : value;
   value--;
-  document.getElementById('number').value = value;
+  document.getElementById('rowNumber').value = value;
 }
 function imageRemove(img,id)
 {
@@ -158,8 +158,8 @@ function imageRemove(img,id)
                     {!! Form::open(['url' => '/save_data','method'=>'post','enctype'=>'multipart/form-data']) !!}
 
                     <div class="wrap-input100 {{ $errors->has('title') ? 'has-error' : '' }}">
-                        {!! Form::text('meeting_name',null,['class' => 'input100']) !!}
-                        <span class="focus-input100" c data-placeholder="Meeting Name"></span>
+                        {!! Form::text('meeting_name',null,['class' => 'input100','placeholder' => 'Meeting Name']) !!}
+                        <span class="focus-input100"></span>
                         @if($errors->has('meeting_name'))
                             <span class="help-block">{{ $errors->first('meeting_name') }}</span>
                         @endif
@@ -167,8 +167,8 @@ function imageRemove(img,id)
 
                     <div class="wrap-input100 {{ $errors->has('slug') ? 'has-error' : '' }}">
                         
-                        {!! Form::text('meeting_time',null,['class' => 'input100','id' => 'datetimepicker4']) !!}
-                        <span class="focus-input100" c data-placeholder="Meeting Date"></span>
+                        {!! Form::text('meeting_time',null,['class' => 'input100','id' => 'datetimepicker4', 'placeholder' => 'Meeting Date']) !!}
+                        <span class="focus-input100"></span>
                         @if($errors->has('meeting_time'))
                             <span class="help-block">{{ $errors->first('meeting_time') }}</span>
                         @endif
@@ -207,12 +207,11 @@ function imageRemove(img,id)
 											<div class="box-body">
 												<div class="wrap-input100">
 													
-													<input type="text" class="input100" name="folder_name" value="" >
-                          <span class="focus-input100" c data-placeholder="Folder Name"></span>
+													<input type="text" class="input100" name="folder_name" placeholder="Folder Name" value="" >
 												</div>	
 												<div class="wrap-input100">
 													
-													<input type="file" class="input100" name="files[]" placeholder="Trends Title" value="" multiple>
+													<input type="file" class="input100" name="files[]" value="" multiple>
 												</div>
 
 												<div class="form-group col-sm-12">
@@ -223,8 +222,8 @@ function imageRemove(img,id)
 									</div>
 
 									<div class="form-group">
-										<button type="button" onClick="incrementValue()" class="btn btn-success addButton">Add Folder</button>
-										<input type="hidden" id="number" name="count" value="0"/>
+										<button type="button" class="btn btn-success addButton">Add Folder</button>
+										<input type="hidden" id="rowNumber" name="count" value="0"/>
 									</div>
 								</div>
 

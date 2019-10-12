@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVerticalsTable extends Migration
+class CreateWelcomeMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVerticalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('verticals', function (Blueprint $table) {
+        Schema::create('welcome_messages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('vertical_id');
             $table->string('guest_name');
@@ -28,6 +28,6 @@ class CreateVerticalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verticals');
+        Schema::dropIfExists('welcome_messages');
     }
 }

@@ -36,7 +36,7 @@ table th{
               <div class="box">
                 <div class="box-header">
                     <div class="pull-left">
-                        <a href="{{ route('create_vertical') }}" class="btn btn-success">Add New</a>
+                        <a href="{{ route('create_message') }}" class="btn btn-success">Add New</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -47,7 +47,7 @@ table th{
                         </div>
                     @endif
 
-                    @if (! $verticals_count)
+                    @if (! $welcome_messages_count)
                         <div class="alert alert-danger">
                             <strong>No record found</strong>
                         </div>
@@ -57,22 +57,22 @@ table th{
                             <thead>
                                 <tr>
                                     <th width="80">Sr.</th>
-                                    <th width="120">Vertical Name</th>
+                                    <th width="120">Welcome Message</th>
                                     <th width="80">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($verticals_name as $vertical)
+                                @foreach($welcome_messages as $welcome)
 
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $vertical->vertical_name }}</td>
+                                        <td>{{ $welcome->welcome_message }}</td>
 
                                         <td>
-                                            <a href="/edit_vertical/{{ $vertical->id }}" class="btn btn-xs btn-default">
+                                            <a href="/edit_message/{{ $welcome->id }}" class="btn btn-xs btn-default">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="/delete_vertical/{{ $vertical->id }}" class="btn btn-xs btn-danger">
+                                            <a href="/delete_message/{{ $welcome->id }}" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </td>

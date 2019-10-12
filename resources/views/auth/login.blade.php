@@ -22,8 +22,8 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-                        <input class="input100 @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" required>
-                        <span class="focus-input100" c data-placeholder="Email"></span>
+                        <input class="input100 @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="Email" required>
+                        <span class="focus-input100" ></span>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -36,8 +36,8 @@
                         <span class="btn-show-pass">
                             <i class="zmdi zmdi-eye"></i>
                         </span>
-                        <input class="input100 @error('password') is-invalid @enderror" type="password" name="password" required>
-                        <span class="focus-input100" data-placeholder="Password"></span>
+                        <input class="input100 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required>
+                        <span class="focus-input100"></span>
                         @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
