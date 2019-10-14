@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');                                                      
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', 'HomeController@test')->name('test');
 
 Route::get('/meeting_list', 'MeetingController@index')->name('list');
@@ -74,3 +74,8 @@ Route::get('/message_list', 'WelcomeMessageController@index')->name('message_lis
 Route::get('/edit_message/{id}', 'WelcomeMessageController@edit_message')->name('edit_message');
 Route::post('/update_message', 'WelcomeMessageController@update_message')->name('update_message');
 Route::get('/delete_message/{id}', 'WelcomeMessageController@destroy')->name('destroy');
+
+
+// scheduler Route
+Route::get('/schedulers', 'SchedulersController@index');
+Route::post('/store_schedules', 'SchedulersController@store_schedules')->name('store_schedules');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMeetingTable extends Migration
+class CreateSchedulerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateMeetingTable extends Migration
      */
     public function up()
     {
-        Schema::create('meeting', function (Blueprint $table) {
+        Schema::create('schedulers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('meeting_name');
-            $table->string('meeting_date');
-            $table->string('meeting_time');
-            $table->string('meeting_created_by');
-            $table->string('verticals_id');
-            $table->string('sub_verticals_id');
+            $table->string('content');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('repeat');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateMeetingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meeting');
+        Schema::dropIfExists('schedulers');
     }
 }
